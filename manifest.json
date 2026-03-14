@@ -1,6 +1,6 @@
 {
   "name": "hubble-youtube",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A youtube player for the hubble home dashboard",
   "minAppVersion": "0.1.0",
   "type": [
@@ -17,23 +17,47 @@
       "public": false,
       "body": {
         "type": "object",
-        "required": ["widgetId", "url"],
+        "required": [
+          "widgetId",
+          "url"
+        ],
         "properties": {
-          "widgetId": { "type": "string", "description": "Target widget instance ID (matches the widgetId config property on the visualization)" },
-          "url":      { "type": "string", "description": "YouTube video URL (youtube.com/watch, youtu.be, shorts, or embed)" }
+          "widgetId": {
+            "type": "string",
+            "description": "Target widget instance ID (matches the widgetId config property on the visualization)"
+          },
+          "url": {
+            "type": "string",
+            "description": "YouTube video URL (youtube.com/watch, youtu.be, shorts, or embed)"
+          }
         },
-        "example": { "widgetId": "kitchen-tv", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+        "example": {
+          "widgetId": "kitchen-tv",
+          "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
       },
       "response": {
         "200": {
           "type": "object",
-          "properties": { "ok": { "type": "boolean" } },
-          "example": { "ok": true }
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            }
+          },
+          "example": {
+            "ok": true
+          }
         },
         "400": {
           "type": "object",
-          "properties": { "error": { "type": "string" } },
-          "example": { "error": "Invalid YouTube URL" }
+          "properties": {
+            "error": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "error": "Invalid YouTube URL"
+          }
         }
       }
     },
@@ -46,17 +70,30 @@
       "public": false,
       "body": {
         "type": "object",
-        "required": ["widgetId"],
+        "required": [
+          "widgetId"
+        ],
         "properties": {
-          "widgetId": { "type": "string", "description": "Target widget instance ID" }
+          "widgetId": {
+            "type": "string",
+            "description": "Target widget instance ID"
+          }
         },
-        "example": { "widgetId": "kitchen-tv" }
+        "example": {
+          "widgetId": "kitchen-tv"
+        }
       },
       "response": {
         "200": {
           "type": "object",
-          "properties": { "ok": { "type": "boolean" } },
-          "example": { "ok": true }
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            }
+          },
+          "example": {
+            "ok": true
+          }
         }
       }
     },
@@ -69,17 +106,30 @@
       "public": false,
       "body": {
         "type": "object",
-        "required": ["widgetId"],
+        "required": [
+          "widgetId"
+        ],
         "properties": {
-          "widgetId": { "type": "string", "description": "Target widget instance ID" }
+          "widgetId": {
+            "type": "string",
+            "description": "Target widget instance ID"
+          }
         },
-        "example": { "widgetId": "kitchen-tv" }
+        "example": {
+          "widgetId": "kitchen-tv"
+        }
       },
       "response": {
         "200": {
           "type": "object",
-          "properties": { "ok": { "type": "boolean" } },
-          "example": { "ok": true }
+          "properties": {
+            "ok": {
+              "type": "boolean"
+            }
+          },
+          "example": {
+            "ok": true
+          }
         }
       }
     }
@@ -109,8 +159,14 @@
           "default": "fullscreen",
           "description": "How to display the video when playing",
           "choices": [
-            { "label": "Fullscreen overlay", "value": "fullscreen" },
-            { "label": "Inline (in widget)", "value": "inline" }
+            {
+              "label": "Fullscreen overlay",
+              "value": "fullscreen"
+            },
+            {
+              "label": "Inline (in widget)",
+              "value": "inline"
+            }
           ]
         },
         {
