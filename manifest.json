@@ -1,0 +1,130 @@
+{
+  "name": "hubble-youtube",
+  "version": "0.1.0",
+  "description": "A youtube player for the hubble home dashboard",
+  "minAppVersion": "0.1.0",
+  "type": [
+    "connector",
+    "visualization"
+  ],
+  "endpoints": [
+    {
+      "name": "play",
+      "method": "POST",
+      "path": "/play",
+      "summary": "Play a YouTube video",
+      "description": "Starts playback on a specific widget instance. Extracts the video ID from the provided URL and emits a play command to the target widget.",
+      "public": false,
+      "body": {
+        "type": "object",
+        "required": ["widgetId", "url"],
+        "properties": {
+          "widgetId": { "type": "string", "description": "Target widget instance ID (matches the widgetId config property on the visualization)" },
+          "url":      { "type": "string", "description": "YouTube video URL (youtube.com/watch, youtu.be, shorts, or embed)" }
+        },
+        "example": { "widgetId": "kitchen-tv", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ" }
+      },
+      "response": {
+        "200": {
+          "type": "object",
+          "properties": { "ok": { "type": "boolean" } },
+          "example": { "ok": true }
+        },
+        "400": {
+          "type": "object",
+          "properties": { "error": { "type": "string" } },
+          "example": { "error": "Invalid YouTube URL" }
+        }
+      }
+    },
+    {
+      "name": "pause",
+      "method": "POST",
+      "path": "/pause",
+      "summary": "Toggle pause on the active video",
+      "description": "Pauses a playing video or resumes a paused video on the specified widget instance.",
+      "public": false,
+      "body": {
+        "type": "object",
+        "required": ["widgetId"],
+        "properties": {
+          "widgetId": { "type": "string", "description": "Target widget instance ID" }
+        },
+        "example": { "widgetId": "kitchen-tv" }
+      },
+      "response": {
+        "200": {
+          "type": "object",
+          "properties": { "ok": { "type": "boolean" } },
+          "example": { "ok": true }
+        }
+      }
+    },
+    {
+      "name": "stop",
+      "method": "POST",
+      "path": "/stop",
+      "summary": "Stop and dismiss the current video",
+      "description": "Stops playback, destroys the player, and dismisses the fullscreen overlay on the specified widget instance.",
+      "public": false,
+      "body": {
+        "type": "object",
+        "required": ["widgetId"],
+        "properties": {
+          "widgetId": { "type": "string", "description": "Target widget instance ID" }
+        },
+        "example": { "widgetId": "kitchen-tv" }
+      },
+      "response": {
+        "200": {
+          "type": "object",
+          "properties": { "ok": { "type": "boolean" } },
+          "example": { "ok": true }
+        }
+      }
+    }
+  ],
+  "visualizations": [
+    {
+      "name": "default",
+      "description": "YouTube video player widget",
+      "path": "default",
+      "properties": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Widget title displayed in the edit interface"
+        },
+        {
+          "name": "widgetId",
+          "type": "string",
+          "required": true,
+          "description": "Unique identifier for this widget instance, used to target API calls (e.g. kitchen-tv)"
+        },
+        {
+          "name": "playMode",
+          "type": "choice",
+          "required": false,
+          "default": "fullscreen",
+          "description": "How to display the video when playing",
+          "choices": [
+            { "label": "Fullscreen overlay", "value": "fullscreen" },
+            { "label": "Inline (in widget)", "value": "inline" }
+          ]
+        },
+        {
+          "name": "defaultVolume",
+          "type": "range",
+          "required": false,
+          "default": 80,
+          "description": "Default volume when a video starts playing (0–100)",
+          "min": 0,
+          "max": 100,
+          "step": 1
+        }
+      ]
+    }
+  ],
+  "properties": []
+}
