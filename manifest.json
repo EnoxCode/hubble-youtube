@@ -2,6 +2,7 @@
   "name": "hubble-youtube",
   "version": "0.2.0",
   "description": "A youtube player for the hubble home dashboard",
+  "previewImage": "assets/preview.png",
   "minAppVersion": "0.1.0",
   "type": [
     "connector",
